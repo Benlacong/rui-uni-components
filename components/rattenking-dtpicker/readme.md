@@ -38,6 +38,18 @@ export default {
 |fields		|String	|'second'		            |时间选择器的粒度			|
 |disabled	|Boolean|false						|是否为禁用状态			|
 
+
+**fields 值说明：**
+
+|值 		|类型	|说明					|
+|---		|----	|---					|
+|year		|String	|选择器粒度为年			|
+|month		|String	|选择器粒度为月份			|
+|day		|String	|选择器粒度为天			|
+|hour		|String	|选择器粒度为小时			|
+|minute	    |String |选择器粒度为分钟			|
+|second	    |String |选择器粒度为秒			|
+
 **事件说明：**
 
 |事件名称	|说明		|
