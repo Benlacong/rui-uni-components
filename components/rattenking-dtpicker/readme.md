@@ -26,20 +26,21 @@ export default {
 ></ruiDatePicker>
 ```
 
-实际效果参考：[https://github.com/dcloudio/uni-ui](https://github.com/dcloudio/uni-ui)
+实际效果参考：[https://github.com/Rattenking/rui-uni-components](https://github.com/Rattenking/rui-uni-components)
 
 **DatePicker 属性说明：**
 
-|属性名		|类型	|默认值	|说明					|
-|---		|----	|---	|---					|
-|value		|Number	|0		|输入框当前值			|
-|min		|Number	|0		|最小值					|
-|max		|Number	|100	|最大值					|
-|step		|Number	|1		|每次点击改变的间隔大小	|
-|disabled	|Boolean|false	|是否为禁用状态			|
+|属性名		|类型	|默认值	                    |说明					|
+|---		|----	|---	                    |---					|
+|start		|String	|'1900-00-00 00:00:00'		|限制选择器选择的最小时间	|
+|end		|String	|'2500-12-30 23:59:59'		|限制选择器选择的最大时间	|
+|value		|String	|'2019-03-15 10:45:00'	    |当前时间选择器显示的时间	|
+|fields		|String	|'second'		            |时间选择器的粒度			|
+|disabled	|Boolean|false						|是否为禁用状态			|
 
 **事件说明：**
 
 |事件名称	|说明		|
 |---|---|
-|change	|输入框值改变时触发的事件，参数为输入框当前的 value|
+|change	|时间选择器点击【确定】按钮时时触发的事件，参数为picker的当前的 value|
+|cancel	|时间选择器点击【取消】按钮时时触发的事件|
