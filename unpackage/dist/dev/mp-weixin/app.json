@@ -1,12 +1,15 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/index/dtpicker",
+    "pages/index/navber",
+    "pages/index/tabber"
   ],
   "subPackages": [],
   "window": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "Rattenking 博客",
+    "navigationBarBackgroundColor": "#2ed39e",
     "backgroundColor": "#F8F8F8"
   },
   "usingComponents": {}

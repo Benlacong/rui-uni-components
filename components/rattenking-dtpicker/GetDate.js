@@ -1,28 +1,79 @@
 const GetDate = {
-  withData: (param) => {
+  withData: (num) => {
+		let param = parseInt(num);
     return param < 10 ? '0' + param : '' + param;
   },
   getTimes(str){
     return new Date(str.replace(/-/g,'/')).getTime();
   },
+	getCurrentTimes(){
+		const date = new Date();
+		const year = date.getFullYear();
+		const month = date.getMonth() + 1;
+		const day = date.getDate();
+		const hour = date.getHours();
+		const minute = date.getMinutes();
+		const second = date.getSeconds();
+		return {
+			detail: {
+				year: year,
+				month: month,
+				day: day,
+				hour: hour,
+				minute: minute,
+				second: second
+			}
+		}
+	},
   format(arr){
     let curarr = [];
     let curarr0 = [];
     let str = '';
-    arr.forEach((o,index) => {
+    arr.forEach((cur,index) => {
+			let o = GetDate.withData(cur);
       if(index > 2){
         curarr.push(o);
       }else{
-        curarr0.push(o)
+        curarr0.push(o);
       }
     })
     if(arr.length < 4){
-      str = arr.join('-')
+      str = curarr0.join('-');
     }else{
-      str = curarr0.join('-') + ' ' + curarr.join(':')
+      str = curarr0.join('-') + ' ' + curarr.join(':');
     }
     return str;
   },
+	getCurrentStringValue(str){
+		let newstr = str.split(' ');
+		if(newstr && newstr[1]){
+			let arr = [...newstr[0].split('-'),...newstr[1].split(':')];
+			return arr;
+		}
+		return newstr[0].split('-');
+	},
+	getCompare(curp,startp,endp,timesp){
+		let cur = GetDate.getTimes(curp);
+		let start = GetDate.getTimes(startp);
+		let end = GetDate.getTimes(endp);
+		if(cur < start){
+			return GetDate.getTimeIndex(timesp,GetDate.getCurrentStringValue(startp));
+		}else if(cur > end){
+			return GetDate.getTimeIndex(timesp,GetDate.getCurrentStringValue(endp));
+		}else{
+			return GetDate.getTimeIndex(timesp,GetDate.getCurrentStringValue(curp));
+		}
+	},
+	getChooseArr(times,indexs){
+		let arr = [];
+		times.forEach((cur,index) => arr.push(cur[indexs[index]]));
+		return arr;
+	},
+	getNewArray(arr){
+		let newarr = [];
+		arr.forEach(cur => newarr.push(cur));
+		return newarr;
+	},
   getLoopArray: (start, end) => {
     var start = start || 0;
     var end = end || 1;
@@ -62,7 +113,7 @@ const GetDate = {
   getDateTimes: (opts) => {
     var years = GetDate.getLoopArray(opts.start, opts.end);
     var months = GetDate.getLoopArray(1, 12);
-    var days = GetDate.getLoopArray(1, 31);
+    var days = GetDate.getMonthDay(opts.curyear, opts.curmonth);
     var hours = GetDate.getLoopArray(0, 23);
     var minutes = GetDate.getLoopArray(0, 59);
     var seconds = GetDate.getLoopArray(0, 59);

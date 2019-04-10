@@ -14,4 +14,9 @@
 
 <style>
 	/*每个页面公共css */
+	.rui-content{
+		text-align: center;
+		height: 400upx;
+		font-family: '微软雅黑';
+	}
 </style>

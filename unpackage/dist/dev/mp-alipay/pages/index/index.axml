@@ -1,0 +1,2 @@
+<import src="/components/rattenking-list/rattenking-list.vue.axml"/><template name="6b59bab6"><view class="_view rui-content {{ h[ 0 ].rcl }}"><template is="458b8eb5" data="{{ ...$root[ cp + 0 + '-' + (item_i2 !== undefined ? item_i2 : index) ], $root, _t: '-' + (item_i2 !== undefined ? item_i2 : index) }}" a:for="{{ h[ 1 ].li }}" a:key="index" a:for-item="item" a:for-index="index" /></view></template>
+<template is="6b59bab6" data="{{ ...$root['0'], $root }}"/>

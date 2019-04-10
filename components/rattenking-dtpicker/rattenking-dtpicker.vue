@@ -1,6 +1,6 @@
 <template>
 	<picker class='rui-picker rui-class' mode="multiSelector" :range="times" :value="timesIndex" :disabled="curDisabled" @change='changeDate' @cancel="cancelDate" @columnchange="columnchangeDate">
-	  {{value}}
+	  {{curValue}}
 	</picker>
 </template>
 
@@ -28,7 +28,7 @@
 			 */
 			value: {
 			  type: String,
-			  default: '2019-03-15 10:45:00'
+			  default: ''
 			},
 			/**
 			 * picker的时间粒度
@@ -66,13 +66,32 @@
 				this.curDisabled = val;
 			},
 			curValue(val) {
+				this.curValue = val;
 				this.$emit('change', val);
+			},
+			times(val){
+				this.times = val;
+			},
+			timesIndex(val){
+				this.timesIndex = val;
 			},
 			cancel(val) {
 				this.$emit('cancel', val);
 			}
 		},
 		created() {
+			if(this.value === ''){
+				let time = GetDate.getCurrentTimes();
+				let arr = [];
+				for (let key in time.detail) {
+					arr.push(time.detail[key]);
+					if(key === this.fields){
+						break;
+					}
+				}
+				this.value = GetDate.format(arr);
+				this.curValue = GetDate.format(arr);
+			}
 			switch (this.fields){
 				case 'year':
 				  if (this.value.length !== 4) {GetDate.error('时间粒度和时间格式不一致');this.curDisabled = true;return false;}
@@ -109,7 +128,7 @@
 				  break;
 			  }
 			  let values = this.value.split(' ');
-			  let targets = this.fields === 'year' || this.fields === 'month' || this.fields === 'day' ? [...(values[0].split('-'))] : [...(values[0].split('-')), ...(values[1].split(':'))];
+			  let targets = GetDate.getCurrentStringValue(this.value);
 
 			  if (GetDate.getTimes(this.value) < GetDate.getTimes(this.start)){
 				GetDate.error('默认时间不能小于开始时间')
@@ -122,11 +141,11 @@
 				return false;
 			  }
 			  let times = GetDate.getDateTimes({
-				start: this.start.substring(0, 4),
-				end: this.end.substring(0, 4),
-				curyear: this.value.substring(0, 4),
-				curmonth: this.value.substring(5, 7),
-				fields: this.fields,
+					start: this.start.substring(0, 4),
+					end: this.end.substring(0, 4),
+					curyear: this.value.substring(0, 4),
+					curmonth: this.value.substring(5, 7),
+					fields: this.fields
 			  })
 			  let timesIndex = GetDate.getTimeIndex(times, targets);
 			  let timesString = [];
@@ -145,54 +164,39 @@
 				curarr.push(times[i][values[i]])
 			  }
 			  let str = GetDate.format(curarr);
-			  console.log(str)
 			  this.curValue = str;
 			},
 			columnchangeDate(e){
+				// 如果是年和月粒度，那么只需要改变时间格式的index，否则需要判断当月天数
 			  if ((this.fields === 'year' || this.fields === 'month')){
-				let timesIndex = this.timesIndex;
-				timesIndex[e.detail.column] = e.detail.value;
-				this.timesIndex = timesIndex;
-				return false;
-			  }
-			  // 先对timesIndex做出改变
-			  if ((e.detail.column === 0 || e.detail.column === 1 || e.detail.column === 2) && (this.fields !== 'year' || this.fields !== 'month')) {
-				let times = this.times;
-				let timesIndex = this.timesIndex;
-				timesIndex[e.detail.column] = e.detail.value;
-				let days = GetDate.getMonthDay(times[0][timesIndex[0]], times[1][timesIndex[1]]);
-				if (timesIndex[2] >= days.length) {
-				  timesIndex[2] = days.length - 1;
-				} else {
-				  timesIndex[e.detail.column] = e.detail.value;
+					let timesIndex = GetDate.getNewArray(this.timesIndex);
+					timesIndex[e.detail.column] = e.detail.value;
+// 					let arr = GetDate.getCompare(GetDate.format(GetDate.getChooseArr(this.times,timesIndex)),this.start,this.end,this.times);
+// 					console.log(arr)
+					this.timesIndex = timesIndex;
+					return false;
+			  }else{
+					// 如果改变的是年和月，重新获取天数，同时判断天数的index是否大于当前天数，大于就设置为当月最后一天，否则不变。
+					if(e.detail.column === 0 || e.detail.column === 1){
+						let times = GetDate.getNewArray(this.times);
+						let timesIndex = GetDate.getNewArray(this.timesIndex);
+						timesIndex[e.detail.column] = e.detail.value;
+						let days = GetDate.getMonthDay(times[0][timesIndex[0]], times[1][timesIndex[1]]);
+						times[2] = days;
+						if(timesIndex[2] > days.length - 1){
+							timesIndex[2] = days.length - 1;
+						}
+						this.times = times;
+						// let arr = GetDate.getCompare(GetDate.format(GetDate.getChooseArr(this.times,timesIndex)),this.start,this.end,this.times);
+						this.timesIndex = timesIndex;
+					}else{
+						let timesIndex = GetDate.getNewArray(this.timesIndex);
+						timesIndex[e.detail.column] = e.detail.value;
+// 						let arr = GetDate.getCompare(GetDate.format(GetDate.getChooseArr(this.times,timesIndex)),this.start,this.end,this.times);
+// 						console.log(arr)
+						this.timesIndex = timesIndex;
+					}
 				}
-				this.timesIndex = timesIndex;
-			  } else {
-				let timesIndex = this.timesIndex;
-				timesIndex[e.detail.column] = e.detail.value;
-				this.timesIndex = timesIndex;
-			  }
-			  // 判断当前选择是否小于开始时间或者大于结束时间
-			  let values = this.timesIndex;
-			  let times = this.times;
-			  let curarr = [];
-			  for (let i = 0, len = values.length; i < len; i++) {
-				curarr.push(times[i][values[i]])
-			  }
-			  let str = GetDate.format(curarr);
-			  
-			  if (GetDate.getTimes(str) < GetDate.getTimes(this.start)) {
-				let timesString = this.timesString;
-				let timesIndex = [];
-				timesString.forEach(o => timesIndex.push(o));
-				this.timesIndex = timesIndex;
-			  }
-			  if (GetDate.getTimes(str) > GetDate.getTimes(this.end)) {
-				let timesString = this.timesString;
-				let timesIndex = [];
-				timesString.forEach(o => timesIndex.push(o));
-				this.timesIndex = timesIndex;
-			  }
 			},
 			cancelDate(e){
 				this.cancel = e

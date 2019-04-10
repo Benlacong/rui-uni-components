@@ -1,0 +1,2 @@
+<import src="./tabber.vue.wxml" />
+    <template is="dbc34d32" data="{{ ...$root['0'], $root }}"/>

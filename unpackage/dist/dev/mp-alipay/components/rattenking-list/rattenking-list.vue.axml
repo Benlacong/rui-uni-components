@@ -1,0 +1,1 @@
+<template name="458b8eb5"><view class="_view rui-flex-list {{ h[ 0 ].rcl }}" url="{{ h[ 0 ][ 'url' ] }}" data-cid="{{ _c || c }}" data-hid="{{ 0 }}" onTap="_pe"><view class="_view rui-flex-left"><text class="_text rui-line-clamp" style="-webkit-line-clamp:1">{{ h[ 3 ].t }}</text></view><text class="_text rui-li-more"></text></view></template>

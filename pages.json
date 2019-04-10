@@ -3,14 +3,33 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "Rattenking 博客"
+			}
+		},
+		{
+			"path": "pages/index/dtpicker",
+			"style": {
+				"navigationBarTitleText": "Rattenking 博客"
+			}
+		},
+		
+		{
+			"path": "pages/index/navber",
+			"style": {
+				"navigationBarTitleText": "Rattenking 博客"
+			}
+		},
+		{
+			"path": "pages/index/tabber",
+			"style": {
+				"navigationBarTitleText": "Rattenking 博客"
 			}
 		}
 	],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "Rattenking 博客",
+		"navigationBarBackgroundColor": "#2ed39e",
 		"backgroundColor": "#F8F8F8"
 	},
 	"condition" : { //模式配置，仅开发期间生效

@@ -1,0 +1,1 @@
+<template name="458b8eb5"><view class="_view 458b8eb5 rui-flex-list" bindtap="handleProxy" url="{{url}}" data-eventid="{{'458b8eb5-0'}}" data-comkey="{{$k}}"><view class="_view 458b8eb5 rui-flex-left"><text class="_text 458b8eb5 rui-line-clamp" style="-webkit-line-clamp:1;">{{title}}</text></view><text class="_text 458b8eb5 rui-li-more"></text></view></template>

@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/index/dtpicker"
+  ],
+  "window": {
+    "defaultTitle": "Rattenking 博客",
+    "titleBarColor": "#2ed39e",
+    "backgroundColor": "#F8F8F8"
+  }
+}

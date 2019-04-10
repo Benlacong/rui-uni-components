@@ -1,0 +1,1 @@
+<template name="dbc34d32"><scroll-view class="_scroll-view dbc34d32 rui-sticky-content" scroll-y="true"><form bindsubmit="handleProxy" data-eventid="{{'dbc34d32-0'}}" data-comkey="{{$k}}" class="_form dbc34d32"><view class="_view dbc34d32 btn-area"><button class="_button dbc34d32 rui-btn rui-choosetime-btn" formType="submit">确定</button></view></form></scroll-view></template>

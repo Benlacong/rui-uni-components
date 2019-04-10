@@ -1,0 +1,10 @@
+
+.rui-sticky-content{
+	background-color: #fff;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	padding:0 0 13.33333333vw;
+	color:#6e6e6e;
+	font-size:4vw;
+}
+

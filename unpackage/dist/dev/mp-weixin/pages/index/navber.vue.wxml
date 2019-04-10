@@ -1,0 +1,1 @@
+<import src="/components/rui-navber/rui-navber.vue.wxml" /><template name="f02b45ce"><scroll-view class="_scroll-view f02b45ce rui-sticky-content" scroll-y="true"><template bindnavbertap="handleProxy" data-eventid="{{'f02b45ce-0'}}" data-comkey="{{$k}}" data="{{...$root['0'], ...$root[$kk+'f02b45ce-0'],$root}}" is="458e3e4a"></template></scroll-view></template>
